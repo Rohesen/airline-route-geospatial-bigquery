@@ -9,7 +9,7 @@ A geospatial data pipeline that turns **6,072 airports and 66,922 airline routes
 
 ![India domestic air network](docs/india_routes_map.png)
 
-**[Open the interactive map](https://htmlpreview.github.io/?https://github.com/Rohesen/airline-route-geospatial-bigquery/blob/main/docs/india_routes_map.html)**: hover over any route or airport for details.
+**[Open the interactive map](https://rohesen.github.io/airline-route-geospatial-bigquery/india_routes_map.html)**: hover over any route or airport for details.
 
 ---
 
