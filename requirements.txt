@@ -2,3 +2,4 @@ pandas>=2.0
 folium>=0.15
 google-cloud-bigquery>=3.11
 pytest>=7.0
+matplotlib>=3.7

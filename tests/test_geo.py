@@ -37,3 +37,18 @@ def test_great_circle_bends_north():
     # London to New York arcs north of both endpoints
     path = great_circle_path(*LHR, *JFK, n_points=20)
     assert max(lat for lat, _ in path) > LHR[0]
+
+
+def test_nearby_airports_finds_close_pairs():
+    import pandas as pd
+    from geo_routes.local_pipeline import nearby_airports
+
+    airports = pd.DataFrame({
+        "iata": ["DEL", "BOM", "HDO"],
+        "city": ["Delhi", "Mumbai", "Ghaziabad"],
+        "country": ["India"] * 3,
+        "latitude": [28.5665, 19.0887, 28.7075],
+        "longitude": [77.1031, 72.8679, 77.3577],
+    })
+    result = nearby_airports(airports, "India", 100)
+    assert list(zip(result["iata"], result["iata_b"])) == [("DEL", "HDO")]
