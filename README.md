@@ -53,9 +53,38 @@ India's domestic network (OpenFlights data) is built around two mega-hubs:
 | over 1,500 km | 16 | 8.3% |
 
 - **Overlapping catchments:** 48 pairs of Indian airports sit within 100 km of each other, such as Hyderabad's old and new airports (25 km), Thanjavur–Tiruchirappalli (43 km) and Kanpur–Lucknow (62 km).
+- **Regional clusters:** DBSCAN (150 km radius, at least 3 airports) finds 10 airport clusters in India. The largest is the Northeast, with 16 airports across about 116,000 km², followed by the north-western belt from Srinagar to Dehradun (12) and the far south across Kerala, Tamil Nadu and southern Karnataka (10).
 - **Globally**, the longest direct route in the data is Atlanta–Johannesburg at 13,583 km, and Frankfurt is the best-connected airport with 239 direct destinations.
 
 Full tables: [docs/results.md](docs/results.md).
+
+## Running on BigQuery
+
+The full pipeline was run on Google Cloud: data loaded from Cloud Shell, all 8 SQL files executed, and the results matched the local pandas run exactly. Every query processed under 5 MB, well inside BigQuery's free tier.
+
+**Pipeline run in Cloud Shell:** both tables loaded, then every SQL file executed in order.
+
+![Pipeline run in Cloud Shell](docs/screenshots/01_cloud_shell_pipeline_run.jpg)
+
+**The `airline_geo` dataset:** `routes_geo` stores each route's distance and its `route_line` as a `GEOGRAPHY` column.
+
+![BigQuery dataset and routes_geo schema](docs/screenshots/02_bigquery_dataset_routes_geo_schema.jpg)
+
+**DBSCAN clustering with `ST_CLUSTERDBSCAN`,** returning each cluster's member airports, area and enclosing polygon:
+
+![DBSCAN cluster query in BigQuery](docs/screenshots/03_bigquery_dbscan_clusters_query.jpg)
+
+**The clusters on a map,** shaded by number of airports, in BigQuery's built-in visualisation:
+
+![Airport clusters on a BigQuery map](docs/screenshots/04_bigquery_geoviz_airport_clusters_map.jpg)
+
+**India's 193 domestic routes as geodesic `LINESTRING`s,** built with `ST_MAKELINE`:
+
+![India routes query in BigQuery](docs/screenshots/05_bigquery_india_routes_query.jpg)
+
+**The same routes on the map,** coloured by distance; clicking a route shows its properties:
+
+![India domestic routes on a BigQuery map](docs/screenshots/06_bigquery_geoviz_india_routes_map.jpg)
 
 ## Example query
 
