@@ -82,7 +82,7 @@ The full pipeline was run on Google Cloud: data loaded from Cloud Shell, all 8 S
 
 ![India routes query in BigQuery](docs/screenshots/05_bigquery_india_routes_query.jpg)
 
-**The same routes on the map,** coloured by distance; clicking a route shows its properties:
+**The same routes on the map:** Mumbai and Delhi stand out as the two hubs most routes fan out from.
 
 ![India domestic routes on a BigQuery map](docs/screenshots/06_bigquery_geoviz_india_routes_map.jpg)
 
